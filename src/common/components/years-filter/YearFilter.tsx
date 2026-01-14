@@ -1,5 +1,4 @@
 import { memo, useState } from "react";
-import { useTranslation } from "react-i18next";
 import * as XLSX from "xlsx";
 import { useYearStats } from "./useYearStats";
 import YearHistogram from "./YearHistogram";
@@ -11,25 +10,20 @@ const START = 1927;
 const END = 2026;
 
 const YearFilter = () => {
-  const { i18n } = useTranslation();
   const { data = [], isLoading } = useYearStats(START, END);
   const [expanded, setExpanded] = useState(true);
 
-  const exportExcel = () => {
-    const sheet = XLSX.utils.json_to_sheet(data);
-    const book = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(book, sheet, "Leaflets by Year");
-    XLSX.writeFile(book, "leaflets-years.xlsx");
-  };
+  // const exportExcel = () => {
+  //   const sheet = XLSX.utils.json_to_sheet(data);
+  //   const book = XLSX.utils.book_new();
+  //   XLSX.utils.book_append_sheet(book, sheet, "Leaflets by Year");
+  //   XLSX.writeFile(book, "leaflets-years.xlsx");
+  // };
 
   return (
     <div className="relative">
       <div className="flex justify-between items-center mb-2">
-        <h4 className="text-sm font-medium text-text-main">
-          {i18n.language === "ar" ? "سنة الإصدار" : "Publication Year"}
-        </h4>
-
-        <div className="flex gap-3 text-xs">
+        {/* <div className="flex gap-3 text-xs">
           <button onClick={() => setExpanded((p) => !p)} className="underline">
             {expanded ? "Collapse" : "Expand"}
           </button>
@@ -37,7 +31,7 @@ const YearFilter = () => {
           <button onClick={exportExcel} className="underline">
             Export Excel
           </button>
-        </div>
+        </div> */}
       </div>
 
       {isLoading ? (

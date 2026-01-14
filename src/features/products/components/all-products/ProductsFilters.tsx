@@ -92,7 +92,7 @@ const ProductsFilters: FC = () => {
             <Divider />
 
             {/* Price */}
-            <FilterSection title={t("price")}>
+            <FilterSection title={t("Publication Year")}>
               <YearFilter />
             </FilterSection>
 

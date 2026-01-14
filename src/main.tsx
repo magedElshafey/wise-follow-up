@@ -8,6 +8,12 @@ import LanguageProvider from "./store/LanguageProvider";
 import { Toaster } from "sonner";
 import { router } from "./routes/index";
 import { CookieConsentProvider } from "./features/cookies/CookieConsentProvider";
+import { pdfjs } from "react-pdf";
+import "react-pdf/dist/Page/TextLayer.css";
+import "react-pdf/dist/Page/AnnotationLayer.css";
+
+pdfjs.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
+
 createRoot(document.getElementById("root")!).render(
   <HelmetProvider>
     <QueryClientProvider client={queryClient}>

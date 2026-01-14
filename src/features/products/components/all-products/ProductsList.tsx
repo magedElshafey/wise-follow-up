@@ -1,13 +1,13 @@
 import { FC, memo } from "react";
 import { useTranslation } from "react-i18next";
-import { Link, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 
-import ProductCard from "../card/ProductCard";
-import ProductListCard from "../card/ProductListCard";
 import FetchHandler from "@/common/api/fetchHandler/FetchHandler";
 import useInfiniteProducts from "../../api/useInfiniteProducts";
 import MainBtn from "@/common/components/buttons/MainBtn";
 import ProductSkelton from "@/common/components/loader/skeltons/ProductSkelton";
+import { LeafletType } from "@/features/home/components/featured-leaflets/featuredLeaflet.types";
+import FeaturedLeafletCard from "@/features/home/components/featured-leaflets/FeaturedLeafletCard";
 
 const ProductsList: FC = () => {
   const { t } = useTranslation();
@@ -16,19 +16,15 @@ const ProductsList: FC = () => {
   const pageFromUrl = Number(searchParams.get("page")) || 1;
 
   const queryResult = useInfiniteProducts();
-  console.log("query from leaflet", queryResult?.data);
   const products = (queryResult.data?.pages || []).flatMap((page) => page.data);
-  console.log("products", products);
   return (
     <div className="w-full flex-1">
       <div className="bg-white rounded-lg">
         <FetchHandler queryResult={queryResult} skeletonType="product">
           {products.length > 0 ? (
-            <div>
-              {products.map((product) => (
-                <Link className="block mb-5" to={`/leaflets/${product?.slug}`}>
-                  {product?.title}
-                </Link>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+              {products.map((product: LeafletType) => (
+                <FeaturedLeafletCard key={product?.id} leaflet={product} />
               ))}
             </div>
           ) : (

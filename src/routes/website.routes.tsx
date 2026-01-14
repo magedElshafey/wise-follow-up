@@ -79,14 +79,14 @@ export const websiteRoutes: RouteObject = {
       },
     },
     {
-      path: "products",
+      path: "leaflets",
       children: [
         {
           index: true,
           element: <AllProducts />,
         },
         {
-          path: ":id",
+          path: ":slug",
           element: lazyLoad(
             () => import("../features/products/pages/ProductDetails")
           ),

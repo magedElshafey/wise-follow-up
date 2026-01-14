@@ -19,7 +19,7 @@ const Navbar: React.FC<NavbarProps> = ({
   return (
     <header
       className="
-        sticky top-0 z-40
+        z-40
       bg-bg-surface/90 backdrop-blur
     border-b border-border-subtle
       "

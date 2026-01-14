@@ -1,19 +1,17 @@
 import React, { useState, useEffect, FormEvent } from "react";
-import {
-  useSearchSuggestions,
-  type SuggestionItem,
-} from "../hooks/useSearchSuggestions";
+import { useSearchSuggestions } from "../hooks/useSearchSuggestions";
 import { useTranslation } from "react-i18next";
 import Loader from "@/common/components/loader/spinner/Loader";
 import EmptyData from "@/common/components/empty-data/EmptyData";
-
+import { useNavigate } from "react-router-dom";
 type SearchBarVariant = "hero" | "compact";
-
+type SuggestionItem = {
+  name: string;
+};
 type SearchBarProps = {
   variant?: SearchBarVariant;
   initialQuery?: string;
-  onSubmit: (query: string) => void;
-  onSelectSuggestion: (item: SuggestionItem) => void;
+
   label?: string;
   description?: string;
 };
@@ -21,15 +19,17 @@ type SearchBarProps = {
 const SearchBar: React.FC<SearchBarProps> = ({
   variant = "compact",
   initialQuery = "",
-  onSubmit,
-  onSelectSuggestion,
-  label = "Search the library",
-  description = "Type a condition, symptom, surgery, test, or medication name.",
 }) => {
+  const navigate = useNavigate();
   const { t } = useTranslation();
   const [query, setQuery] = useState(initialQuery);
   const [open, setOpen] = useState(false);
   const queryResult = useSearchSuggestions(query);
+  const navigateToExplore = (value: string) => {
+    if (!value.trim()) return;
+
+    navigate(`/leaflets?filter-search=${encodeURIComponent(value.trim())}`);
+  };
 
   useEffect(() => setQuery(initialQuery), [initialQuery]);
 
@@ -38,12 +38,12 @@ const SearchBar: React.FC<SearchBarProps> = ({
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setOpen(false);
-    onSubmit(query.trim());
+    navigateToExplore(query);
   };
 
   const handleSelect = (item: SuggestionItem) => {
     setOpen(false);
-    onSelectSuggestion(item);
+    navigateToExplore(item.name); // or use the correct property name from SuggestionItem
   };
 
   return (
@@ -51,16 +51,6 @@ const SearchBar: React.FC<SearchBarProps> = ({
       className="relative space-y-3"
       aria-labelledby="home-hero-search-label"
     >
-      <div className="flex flex-col gap-1">
-        <span
-          id="home-hero-search-label"
-          className="text-xs font-medium uppercase tracking-wide text-text-muted"
-        >
-          {label}
-        </span>
-        <span className="text-xs text-text-muted">{description}</span>
-      </div>
-
       <form
         role="search"
         aria-label="Search patient leaflets and tools"

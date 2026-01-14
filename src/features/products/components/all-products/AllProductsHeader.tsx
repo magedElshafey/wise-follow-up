@@ -26,10 +26,10 @@ const AllProductsHeader: FC = () => {
             {t("filters")}
           </span>
         </button>
-        <h1 className="text-3xl font-bold hidden lg:block">{t("products")}</h1>
+        <h1 className="text-3xl font-bold hidden lg:block">{t("leaflets")}</h1>
       </div>
 
-      <div className="flex-between lg:w-1/2 gap-4">
+      <div>
         <div className="flex items-center gap-4">
           <span className="font-medium text-text-gray hidden sm:inline">
             {t("sort_by")}

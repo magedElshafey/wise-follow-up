@@ -1,28 +1,15 @@
-import useGetWebsiteSettings from "@/features/settings/api/useGetWebsiteSettings";
 import ScrollToTopButton from "./scroll-to-top/ScrollToTopButton";
 import StickyNavbar from "./sticky-navbar/StickyNavbar";
 import { Outlet } from "react-router-dom";
-import NavbarSkeleton from "@/common/components/loader/skeltons/NavbarSkeleton";
 import Footer from "./footer/Footer";
 import CookieBanner from "@/features/cookies/CookieBanner";
 
 const WebsiteLayout = () => {
-  const { data, isLoading } = useGetWebsiteSettings();
-
   return (
-    <div className="flex flex-col min-h-screen overflow-x-hidden">
+    <div className="flex flex-col min-h-screen overflow-x-hidden mt-[60px]">
       <ScrollToTopButton />
-      {/* <div className="md:hidden">
-        <MobileNavbar logo={data?.site_logo || "/images/logo.png"} />
-      </div> */}
 
-      {isLoading ? (
-        <NavbarSkeleton />
-      ) : (
-        <>
-          <StickyNavbar logo={""} />
-        </>
-      )}
+      <StickyNavbar logo={""} />
 
       <main className="grow py-2 flex flex-col">
         <Outlet />

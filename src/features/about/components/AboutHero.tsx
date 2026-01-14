@@ -1,9 +1,9 @@
+import HeroLayout from "@/common/layout/hero-layout/HeroLayout";
 import { founders } from "../data/team";
 export default function FoundersHero() {
   return (
-    <section className="relative overflow-hidden">
+    <HeroLayout>
       {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary-soft via-bg-alt to-bg-surface" />
 
       <div className="relative containerr py-section-y">
         <div className="grid gap-16 lg:grid-cols-2 lg:items-center">
@@ -42,6 +42,6 @@ export default function FoundersHero() {
           </div>
         </div>
       </div>
-    </section>
+    </HeroLayout>
   );
 }

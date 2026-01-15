@@ -1,14 +1,23 @@
 import { Link } from "react-router-dom";
 import { FooterLink } from "../../types/footer.types";
 import { openCookieSettings } from "@/features/cookies/CookieConsentProvider";
+import useGetAllPolicies from "@/features/policies/api/useGetAllPolicies";
+import { useMemo } from "react";
 
 const CopyRight = () => {
   const year = new Date().getFullYear();
-  const POLICY_LINKS: FooterLink[] = [
-    { label: "Privacy", href: "/privacy" },
-    { label: "Cookies", href: "/cookies" },
-    { label: "Terms of use", href: "/terms" },
-  ];
+  const { data } = useGetAllPolicies();
+  console.log();
+  const policyLinks = useMemo<FooterLink[]>(() => {
+    if (!data?.length) return [];
+
+    return data.map((policy) => ({
+      label: policy.title,
+      href: `/policies/${policy.slug}`,
+    }));
+  }, [data]);
+  const linksToRender = policyLinks.length ? policyLinks : [];
+
   return (
     <div
       className="
@@ -29,10 +38,11 @@ const CopyRight = () => {
       <div className="flex flex-wrap items-center gap-3 md:justify-end">
         {/* Small pills for policies */}
         <ul className="flex flex-wrap items-center gap-2 text-xs">
-          {POLICY_LINKS.map((item) => (
-            <li key={item.href}>
+          {linksToRender.map((item, index) => (
+            <li key={item.href + index}>
               <Link
                 to={item.href}
+                aria-label={item.label}
                 className="
                       inline-flex items-center rounded-pill
                       border border-border-subtle

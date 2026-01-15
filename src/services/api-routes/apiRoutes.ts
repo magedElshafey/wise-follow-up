@@ -10,10 +10,12 @@ export const apiRoutes = {
   search: "products/search",
   contactSettings: "settings/contact",
   counties: "/counties",
-  countries: "/countries", orgTypes: "/organization-types", organizations: "/organizations", departments: "departments", years: "/leaflets/years-stats", privacy: "static-pages/privacy-policy",
-  cookies: "static-pages/cookies-policy",
-  terms: "static-pages/terms-of-use",
-  disclaimer: "static-pages/medical-disclaimer",
+  countries: "/countries", orgTypes: "/organization-types", organizations: "/organizations", departments: "departments", years: "/leaflets/years-stats",
+  policies: "policies-pages",
+  privacy: `policies-pages/privacy-policy`,
+  cookies: "policies-pages/cookies-policy",
+  terms: "policies-pages/terms-of-use",
+  disclaimer: "policies-pages/medical-disclaimer",
   news_letter: "newsletter/subscribe", simpleBlogs: "blogs/simple",
 
 };

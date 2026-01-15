@@ -10,7 +10,7 @@ const LINK_GROUPS: FooterLinkGroupT[] = [
     id: "leaflets",
     title: "Patient leaflets",
     links: [
-      { label: "All leaflets", href: "/explore?type=leaflets" },
+      { label: "All leaflets", href: "/leaflets" },
       {
         label: "Eye conditions",
         href: "/explore?type=leaflets&category=eye-conditions",
@@ -25,19 +25,7 @@ const LINK_GROUPS: FooterLinkGroupT[] = [
       },
     ],
   },
-  {
-    id: "tools",
-    title: "Tools & calculators",
-    links: [
-      { label: "All tools", href: "/explore?type=tools" },
-      { label: "Risk & scores", href: "/explore?type=tools&category=risk" },
-      {
-        label: "Vision simulators",
-        href: "/explore?type=tools&category=vision",
-      },
-      { label: "Trackers", href: "/explore?type=tools&category=trackers" },
-    ],
-  },
+
   {
     id: "about",
     title: "About Wise Follow Up",
@@ -77,14 +65,7 @@ const Footer: React.FC = () => {
 
         {/* Middle section: safety note */}
         <SafetyNote />
-        <FooterConnectSection
-          onSubscribe={async (email) => {
-            // TODO: Call your API route for newsletter subscription
-            // await Axios.post(apiRoutes.newsletterSubscribe, { email });
-            console.log("subscribe:", email);
-          }}
-          buyMeCoffeeUrl="https://www.buymeacoffee.com/yourPage"
-        />
+        <FooterConnectSection buyMeCoffeeUrl="https://www.buymeacoffee.com/yourPage" />
         {/* copyRight */}
         <CopyRight />
       </div>

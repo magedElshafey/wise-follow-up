@@ -3,13 +3,14 @@ import CategoryPill from "./CategoryPill";
 import type { Articles } from "../types/blog.types";
 import MetaItem from "./MetaItem";
 import { formatDate } from "@/utils/formatDate";
+import HeroLayout from "@/common/layout/hero-layout/HeroLayout";
 
 const BlogHeader: React.FC<{ post: Articles }> = ({ post }) => {
   const { t } = useTranslation();
 
   return (
-    <header className="bg-bg-page border-b border-border-subtle">
-      <div className="containerr py-6 md:py-8 lg:py-10">
+    <HeroLayout minHeight="min-h-[30vh]">
+      <header>
         <div className="flex flex-col md:flex-row justify-between gap-4">
           <div className="flex flex-col gap-4">
             {post.category && <CategoryPill label={post.category.name} />}
@@ -22,7 +23,6 @@ const BlogHeader: React.FC<{ post: Articles }> = ({ post }) => {
               <p className="max-w-3xl text-text-muted">{post.excerpt}</p>
             )}
           </div>
-
           <div className="space-y-1">
             <div className="flex gap-2">
               {post.author?.image && (
@@ -59,8 +59,8 @@ const BlogHeader: React.FC<{ post: Articles }> = ({ post }) => {
             </div>
           </div>
         </div>
-      </div>
-    </header>
+      </header>
+    </HeroLayout>
   );
 };
 

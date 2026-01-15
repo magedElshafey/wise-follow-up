@@ -4,10 +4,19 @@ import LeafletsFilters from "../../uk-hierarchy/components/hierarchy-filter/comp
 import LeafletsList from "../components/LeafletsList";
 import LeafletsFiltersProvider from "../../uk-hierarchy/components/hierarchy-filter/providers/LeafletsFiltersProvider";
 import HeroLayout from "@/common/layout/hero-layout/HeroLayout";
-import SearchBar from "@/features/search/components/SearchBar";
-import { useSearchParams } from "react-router-dom";
+import SearchBar from "@/features/search-advanced/components/SearchBar";
+import { Link, useSearchParams } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import { useSearchController } from "@/features/search-advanced/hooks/useSearchController";
 const AllLeaflets: FC = () => {
   const [params] = useSearchParams();
+  const { t } = useTranslation();
+  const searchController = useSearchController({
+    mode: "normal",
+    initialPayload: {
+      value: params.get("filter-search") || "",
+    },
+  });
   return (
     <>
       <HeroLayout minHeight="min-h-[30vh] lg:min-h-[50vh]">
@@ -21,10 +30,13 @@ const AllLeaflets: FC = () => {
           </p>
 
           <div>
-            <SearchBar
-              variant="hero"
-              initialQuery={params.get("filter-search") || ""}
-            />
+            <SearchBar variant="hero" controller={searchController} />
+            <Link
+              to="/search-advanced"
+              className="block w-fit mt-2 capitalize duration-300 transition-all hover:underline  text-text-main"
+            >
+              {t("advanced search")}
+            </Link>
           </div>
         </div>
       </HeroLayout>

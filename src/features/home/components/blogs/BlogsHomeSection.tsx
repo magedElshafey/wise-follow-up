@@ -26,7 +26,7 @@ const BlogsHomeSection: React.FC<Props> = ({ posts, isLoading = false }) => {
             </div>
           </div>
         ) : (
-          <div className="grid gap-4 lg:grid-cols-3 items-start">
+          <div className="grid gap-4 md:gap-6 lg:gap-8 xl:gap-10 lg:grid-cols-3 items-start">
             {posts.map((p) => (
               <BlogCard key={p.id} post={p} />
             ))}

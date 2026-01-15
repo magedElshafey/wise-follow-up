@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 interface SectionHeaderProps {
   title: string;
   titleId: string;
@@ -15,6 +16,7 @@ const SectionHeader: React.FC<SectionHeaderProps> = ({
   path = "/",
   viewAllText = "View all →",
 }) => {
+  const { t } = useTranslation();
   return (
     <header className="mb-6 flex items-end justify-between gap-4">
       <div>
@@ -22,10 +24,10 @@ const SectionHeader: React.FC<SectionHeaderProps> = ({
           id={titleId}
           className="text-lg md:text-xl xl:text-2xl 2xl:text-4xl font-semibold text-primary"
         >
-          {title}
+          {t(title)}
         </h2>
         {description && (
-          <p className="text-sm text-text-muted">{description}</p>
+          <p className="text-sm text-text-muted">{t(description)}</p>
         )}
       </div>
       {hasViewAll && (
@@ -40,7 +42,7 @@ const SectionHeader: React.FC<SectionHeaderProps> = ({
               rounded-sm
             "
         >
-          {viewAllText}
+          {t(viewAllText)}
         </Link>
       )}
     </header>

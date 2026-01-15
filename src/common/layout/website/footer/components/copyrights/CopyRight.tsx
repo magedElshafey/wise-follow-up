@@ -7,7 +7,7 @@ import { useMemo } from "react";
 const CopyRight = () => {
   const year = new Date().getFullYear();
   const { data } = useGetAllPolicies();
-  console.log();
+  console.log("policy data", data);
   const policyLinks = useMemo<FooterLink[]>(() => {
     if (!data?.length) return [];
 
@@ -37,13 +37,14 @@ const CopyRight = () => {
 
       <div className="flex flex-wrap items-center gap-3 md:justify-end">
         {/* Small pills for policies */}
-        <ul className="flex flex-wrap items-center gap-2 text-xs">
-          {linksToRender.map((item, index) => (
-            <li key={item.href + index}>
-              <Link
-                to={item.href}
-                aria-label={item.label}
-                className="
+        {linksToRender?.length > 0 && (
+          <ul className="flex flex-wrap items-center gap-2 text-xs">
+            {linksToRender.map((item, index) => (
+              <li key={item.href + index}>
+                <Link
+                  to={item.href}
+                  aria-label={item.label}
+                  className="
                       inline-flex items-center rounded-pill
                       border border-border-subtle
                       px-3 py-1
@@ -53,12 +54,14 @@ const CopyRight = () => {
                       focus-visible:ring-primary focus-visible:ring-offset-2
                       focus-visible:ring-offset-bg-surface
                     "
-              >
-                {item.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
+                >
+                  {item.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        )}
+
         <button
           type="button"
           onClick={openCookieSettings}

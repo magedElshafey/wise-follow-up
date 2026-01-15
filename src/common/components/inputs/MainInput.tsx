@@ -75,7 +75,12 @@ const MainInput = React.forwardRef<HTMLInputElement, MainInputProps>(
         )}
 
         <div
-          className={`transition duration-150 rounded-lg w-full py-3 px-4 flex items-center gap-3 bg-background-gray
+          className={`transition duration-150  w-full rounded-pill  px-4 py-2.5 pr-10 flex items-center gap-3 bg-bg-surface
+border border-border-subtle
+focus-within:ring-2 focus-within:ring-primary
+text-text-main
+placeholder:text-text-muted
+shadow-soft
           ${disabled ? "opacity-50 cursor-not-allowed" : ""}
           ${
             error
@@ -101,7 +106,12 @@ const MainInput = React.forwardRef<HTMLInputElement, MainInputProps>(
             aria-invalid={!!error}
             aria-describedby={error ? `${inputId}-error` : undefined}
             list={enableAutocomplete ? `${inputId}-list` : undefined}
-            className="flex-1 outline-none w-full bg-transparent border-none text-[#333333] placeholder:text-gray-400"
+            className="flex-1 outline-none w-full bg-transparent border-none 
+
+
+text-text-main
+placeholder:text-text-muted
+"
             {...rest}
           />
 

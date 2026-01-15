@@ -1,5 +1,7 @@
-import React, { FormEvent, useId, useState } from "react";
-
+import React, { useId } from "react";
+import useNewsLetterLogic from "../../newsletter/logic/useNewsLetterLogic";
+import { useTranslation } from "react-i18next";
+import i18n from "@/lib/i18n/i18n";
 type SocialLink = { label: string; href: string; icon?: string };
 
 const SOCIAL_LINKS: SocialLink[] = [
@@ -9,36 +11,19 @@ const SOCIAL_LINKS: SocialLink[] = [
 ];
 
 type FooterConnectSectionProps = {
-  onSubscribe?: (email: string) => Promise<void> | void;
   buyMeCoffeeUrl?: string;
 };
 
 const FooterConnectSection: React.FC<FooterConnectSectionProps> = ({
-  onSubscribe,
   buyMeCoffeeUrl = "https://www.buymeacoffee.com/",
 }) => {
   const emailId = useId();
-  const [email, setEmail] = useState("");
-  const [status, setStatus] = useState<
-    "idle" | "loading" | "success" | "error"
-  >("idle");
-
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-    const trimmed = email.trim();
-    if (!trimmed) return;
-
-    try {
-      setStatus("loading");
-      await onSubscribe?.(trimmed);
-      setStatus("success");
-      setEmail("");
-    } catch {
-      setStatus("error");
-    } finally {
-      setTimeout(() => setStatus("idle"), 2500);
-    }
-  };
+  const {
+    states: { isValid, isTouched, email, isPending },
+    handlers: { handleBlur, handleInputChange, handleSubmit },
+  } = useNewsLetterLogic();
+  const { t } = useTranslation();
+  const showError = !isValid && isTouched;
 
   return (
     <section
@@ -70,56 +55,42 @@ const FooterConnectSection: React.FC<FooterConnectSectionProps> = ({
               autoComplete="email"
               placeholder="you@example.com"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="
-                w-full rounded-pill border border-border-subtle bg-bg-surface
-                px-3 py-2 pr-24 text-sm text-text-main
+              onChange={handleInputChange}
+              onBlur={handleBlur}
+              className={`  w-full rounded-pill border border-border-subtle bg-bg-surface
+                px-3 py-2 ${
+                  i18n.language === "en" ? "pr-24" : "pe-24"
+                } text-sm text-text-main
                 placeholder:text-text-muted
                 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary
-                focus:ring-offset-2 focus:ring-offset-bg-page
-              "
+                focus:ring-offset-2 focus:ring-offset-bg-page ${
+                  showError ? "border-red-500" : ""
+                }`}
             />
 
             <button
               type="submit"
-              disabled={status === "loading"}
-              className="
-                absolute right-1 top-1/2 -translate-y-1/2
+              aria-busy={isPending}
+              disabled={isPending || !email.trim() || !isValid}
+              className={`absolute ${
+                i18n.language === "en" ? "right-1" : "left-1"
+              } top-1/2 -translate-y-1/2
                 rounded-pill bg-primary px-3 py-1.5 text-xs font-semibold text-white
                 shadow-soft hover:brightness-110 disabled:opacity-60
                 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary
-                focus-visible:ring-offset-2 focus-visible:ring-offset-bg-page
-              "
+                focus-visible:ring-offset-2 focus-visible:ring-offset-bg-page`}
             >
-              {status === "loading" ? "…" : "Subscribe"}
+              {isPending ? "…" : "Subscribe"}
             </button>
           </div>
-
-          <p className="mt-2 text-[11px] text-text-muted">
-            By subscribing you agree to our{" "}
-            <a
-              href="/privacy"
-              className="
-                text-primary hover:underline
-                focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary
-                focus-visible:ring-offset-2 focus-visible:ring-offset-bg-page
-                rounded-sm
-              "
+          {showError && (
+            <span
+              id="email-error"
+              role="alert"
+              className="text-xs text-red-600 mt-1 block"
             >
-              Privacy Policy
-            </a>
-            .
-          </p>
-
-          {status === "success" && (
-            <p className="mt-2 text-[11px] text-primary">
-              Subscribed successfully ✅
-            </p>
-          )}
-          {status === "error" && (
-            <p className="mt-2 text-[11px] text-text-muted">
-              Something went wrong. Please try again.
-            </p>
+              {t("Please enter a valid email")}
+            </span>
           )}
         </form>
       </div>

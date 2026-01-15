@@ -21,6 +21,8 @@ import FetchHandler from "@/common/api/fetchHandler/FetchHandler";
 import useGetAllReviews from "../../api/reveiws/useGetAllReviews";
 import { useLanguage } from "@/store/LanguageProvider";
 import TestimonialCard from "./TestimonialCard";
+import { Link } from "react-router-dom";
+import MainBtn from "@/common/components/buttons/MainBtn";
 
 /* -------------------------------------------------------------------------- */
 /*                                   Config                                   */
@@ -194,6 +196,16 @@ const TestimonialsSection: React.FC = () => {
                     <TestimonialCard item={item} />
                   </div>
                 ))}
+              </div>
+              <div className="w-full flex justify-center md:justify-end mt-4">
+                <Link to="/submit-review">
+                  <MainBtn
+                    variant="primary"
+                    className="text-xs sm:text-sm px-4 py-2 sm:px-5 sm:py-2.5"
+                  >
+                    {t("submit review")}
+                  </MainBtn>
+                </Link>
               </div>
             </div>
           </m.section>

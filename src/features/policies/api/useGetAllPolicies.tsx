@@ -8,7 +8,8 @@ const useGetAllPolicies = () => {
     queryKey: [apiRoutes?.policies],
     queryFn: async () => {
       const { data } = await Axios.get(apiRoutes?.policies);
-      return data?.data as Policies[];
+      console.log("data from api", data);
+      return data as Policies[];
     },
     ...delayOptions,
   });

@@ -6,7 +6,7 @@ import useNewsLetterApi from "../api/useNewsLetterApi";
 import { AxiosError } from "axios";
 import { Response } from "@/types/Response";
 
-const useNewsLetterLogic = (onClose?: () => void) => {
+const useNewsLetterLogic = () => {
   const { t } = useTranslation();
   const [email, setEmail] = useState("");
   const [isValid, setIsValid] = useState(true);
@@ -47,7 +47,6 @@ const useNewsLetterLogic = (onClose?: () => void) => {
 
       toast.promise(mutateAsync(email), {
         success: (res) => {
-          if (onClose) onClose();
           return res?.message || t("Subscribed successfully");
         },
         error: (err: AxiosError<Response>) => err?.response?.data.message || "",

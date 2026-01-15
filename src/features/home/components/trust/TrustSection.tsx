@@ -27,9 +27,7 @@ const TrustSection: React.FC<Props> = ({ pillars }) => {
             title="Trusted patient information"
             titleId="trust-heading"
             description="Clear leaflets and tools to support safer follow-up decisions."
-            hasViewAll={true}
-            path="/about"
-            viewAllText="How we write & review →"
+            hasViewAll={false}
           />
 
           <div className="mt-5 grid gap-3 md:grid-cols-3">

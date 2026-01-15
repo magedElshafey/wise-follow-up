@@ -7,7 +7,8 @@ export function useGetPageByRoute(route: string) {
     queryKey: [route],
     queryFn: async () => {
       const { data } = await Axios.get(route);
-      return data?.data as Articles;
+      console.log("data from routes", data);
+      return data as Articles;
     },
     enabled: Boolean(route),
   });

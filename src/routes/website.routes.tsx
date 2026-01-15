@@ -18,27 +18,42 @@ export const websiteRoutes: RouteObject = {
       },
     },
     {
-      path: "privacy",
+      path: "search-advanced",
+      element: lazyLoad(
+        () => import("../features/search-advanced/pages/AdvancedSearch")
+      ),
+      handle: {
+        breadcrumb: "About",
+      },
+    },
+    {
+      path: "policies/privacy-policy",
       element: lazyLoad(() => import("../features/policies/pages/PrivacyPage")),
       handle: {
         breadcrumb: "privacy",
       },
     },
     {
-      path: "cookies",
+      path: "policies/cookies-policy",
       element: lazyLoad(() => import("../features/policies/pages/CookiesPage")),
       handle: {
         breadcrumb: "cookies",
       },
     },
     {
-      path: "terms",
+      path: "policies/terms-of-use",
       element: lazyLoad(() => import("../features/policies/pages/TermsPage")),
       handle: {
         breadcrumb: "terms",
       },
     },
-
+    {
+      path: "policies/medical-disclaimer",
+      element: lazyLoad(() => import("../features/policies/pages/MedicalPage")),
+      handle: {
+        breadcrumb: "medical disclimar",
+      },
+    },
     {
       path: "leaflets",
       children: [

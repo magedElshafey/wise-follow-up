@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import type { LeafletType } from "./featuredLeaflet.types";
+import type { LeafletType } from "../../../leaflets/types/featuredLeaflet.types";
 import clsx from "clsx";
 
 type Props = {

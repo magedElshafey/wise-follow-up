@@ -1,6 +1,5 @@
 import { lazyLoad } from "../utils/LazyLoad";
 import type { RouteObject } from "react-router-dom";
-import AllProducts from "@/features/products/pages/AllProducts";
 import { apiRoutes } from "@/services/api-routes/apiRoutes";
 
 export const websiteRoutes: RouteObject = {
@@ -45,16 +44,18 @@ export const websiteRoutes: RouteObject = {
       children: [
         {
           index: true,
-          element: <AllProducts />,
+          element: lazyLoad(
+            () => import("../features/leaflets/pages/AllLeaflets")
+          ),
         },
         {
           path: ":slug",
           element: lazyLoad(
-            () => import("../features/products/pages/ProductDetails")
+            () => import("../features/leaflets/pages/LeafletsDetails")
           ),
           handle: {
-            breadcrumb: "product name",
-            queryKey: [apiRoutes.products],
+            breadcrumb: "leaflet name",
+            queryKey: [apiRoutes.leaflets],
           },
         },
       ],

@@ -6,11 +6,11 @@ import { DUMMY_TRUST_PILLARS } from "../components/trust/dummyTrust";
 import TestimonialsSection from "../components/testimonails/TestimonialsSection";
 import BlogsHomeSection from "../components/blogs/BlogsHomeSection";
 import { DUMMY_BLOGS } from "../components/blogs/dummyBlogs";
-import useGetAllProducts from "@/features/products/api/useGetAllProducts";
 import FetchHandler from "@/common/api/fetchHandler/FetchHandler";
-import useGetDepartments from "@/features/products/api/useGetDepartments";
+import useGetDepartments from "@/features/uk-hierarchy/api/useGetDepartments";
+import useGetAllLeaflets from "@/features/leaflets/api/useGetAllLeaflets";
 const Home = () => {
-  const query = useGetAllProducts({ featured: true });
+  const query = useGetAllLeaflets({ featured: true });
   const departmentQuery = useGetDepartments();
   return (
     <>

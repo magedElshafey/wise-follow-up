@@ -14,7 +14,7 @@ export const apiRoutes = {
   changePassword: "auth/changePassword",
   about: "about",
   cities: "cities",
-  products: "leaflets",
+  leaflets: "leaflets",
   wishlist: "wishlist/toggle",
   faqs: "faqs",
   simpleCategories: "/categories/simple",

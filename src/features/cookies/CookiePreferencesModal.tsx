@@ -5,8 +5,7 @@ import type { CookiePreferences } from "./cookie-consent";
 type Props = { open: boolean; onClose: () => void };
 
 const CookiePreferencesModal: React.FC<Props> = ({ open, onClose }) => {
-  const { prefs, savePrefs, acceptAll, rejectNonEssential } =
-    useCookieConsent();
+  const { prefs, savePrefs, acceptAll } = useCookieConsent();
   const titleId = useId();
   const descId = useId();
   const dialogRef = useRef<HTMLDivElement | null>(null);
@@ -74,7 +73,7 @@ const CookiePreferencesModal: React.FC<Props> = ({ open, onClose }) => {
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-[60]">
+    <div className="fixed inset-0 z-[60] overflow-y-auto">
       <button
         aria-label="Close cookie settings"
         onClick={onClose}
@@ -151,7 +150,7 @@ const CookiePreferencesModal: React.FC<Props> = ({ open, onClose }) => {
           </div>
 
           <div className="mt-6 flex flex-col sm:flex-row gap-2 sm:justify-end">
-            <button
+            {/* <button
               type="button"
               onClick={rejectNonEssential}
               className="
@@ -163,7 +162,7 @@ const CookiePreferencesModal: React.FC<Props> = ({ open, onClose }) => {
               "
             >
               Reject non-essential
-            </button>
+            </button> */}
 
             <button
               type="button"

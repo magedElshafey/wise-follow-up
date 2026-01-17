@@ -31,7 +31,7 @@ const AllBlogsPage: React.FC = () => {
   return (
     <>
       <PageSeo
-        title="Eye Health Blog"
+        title="patient leaflets Blogs"
         description="Read expert-written articles and insights about eye health, treatments, and patient education from Wise Followup."
         canonicalPath="/blogs"
         ogType="website"

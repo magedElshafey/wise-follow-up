@@ -46,7 +46,6 @@ const HomePageSeo = () => {
       ogType="website"
       ogImage={defaultOgImage}
       structuredData={structuredData}
-      // ❌ مفيش hreflang
     />
   );
 };

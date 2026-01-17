@@ -78,7 +78,7 @@ const FeaturedLeafletsSection: React.FC<Props> = ({ leaflets }) => {
             lg:grid-cols-3
           "
         >
-          {leaflets.map((leaflet) => (
+          {leaflets.slice(0, 3).map((leaflet) => (
             <FeaturedLeafletCard key={leaflet.id} leaflet={leaflet} />
           ))}
         </div>

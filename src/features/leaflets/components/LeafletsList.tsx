@@ -165,7 +165,7 @@ const LeafletsList: FC = () => {
 
   return (
     <div className="w-full flex-1">
-      <FetchHandler queryResult={queryResult} skeletonType="leaflet">
+      <FetchHandler queryResult={queryResult} skeletonType="card">
         {/* Updating feedback */}
         {queryResult.isFetching && !queryResult.isFetchingNextPage && (
           <p className="text-xs text-text-muted mb-3">Updating results…</p>

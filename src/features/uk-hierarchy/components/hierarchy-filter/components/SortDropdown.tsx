@@ -14,10 +14,10 @@ const SortDropdown: FC = () => {
   const labels: Record<string, string> = {
     "name-asc": t("name_ascending"),
     "name-desc": t("name_descending"),
-    "price-asc": t("price_ascending"),
-    "price-desc": t("price_descending"),
-    "rating-asc": t("rating_ascending"),
-    "rating-desc": t("rating_descending"),
+    // "price-asc": t("price_ascending"),
+    // "price-desc": t("price_descending"),
+    // "rating-asc": t("rating_ascending"),
+    // "rating-desc": t("rating_descending"),
     "date-asc": t("date_ascending"),
     "date-desc": t("date_descending"),
   };
@@ -88,7 +88,7 @@ const SortDropdown: FC = () => {
         <ul
           role="menu"
           aria-label="sort options"
-          className="absolute min-w-fit w-full top-full sm:start-full md:start-0 bg-white shadow-lg border border-gray-200 rounded-md mt-1 z-30 overflow-y-auto"
+          className="absolute min-w-fit w-full top-full sm:start-full md:start-0 bg-white shadow-lg border border-gray-200 rounded-md  z-30 overflow-y-auto"
         >
           {sortOptions.map((option) => (
             <li key={option.value || "default"}>

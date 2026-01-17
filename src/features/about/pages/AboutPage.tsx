@@ -5,6 +5,7 @@ import MissionVisionMessage from "../components/MissionVisionMessage";
 import FounderProfile from "../components/FounderProfile";
 import { founders } from "../data/team";
 import PageSeo from "@/common/components/seo/PageSeo";
+import ReadingProgress from "@/common/reading-progress/ReadingProgress";
 export default function AboutPage() {
   return (
     <>
@@ -22,6 +23,7 @@ export default function AboutPage() {
             "Specialist eye clinic providing evidence-based ophthalmology information and care in the UK.",
         }}
       />
+      <ReadingProgress />
       <main>
         <AboutHero />
         <OurStory />

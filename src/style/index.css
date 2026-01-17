@@ -2,7 +2,6 @@
 @import "./variables.css";
 @import "./font.css";
 @import "./layout.css";
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

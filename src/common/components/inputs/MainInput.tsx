@@ -82,11 +82,7 @@ text-text-main
 placeholder:text-text-muted
 shadow-soft
           ${disabled ? "opacity-50 cursor-not-allowed" : ""}
-          ${
-            error
-              ? "ring-2 ring-red-500"
-              : "focus-within:ring-2 focus-within:ring-orangeColor"
-          }`}
+          ${error ? "ring-2 ring-red-500" : ""}`}
         >
           {Icon && (
             <Icon size={20} className="text-text-gray" aria-hidden="true" />

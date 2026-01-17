@@ -18,6 +18,13 @@ export const websiteRoutes: RouteObject = {
       },
     },
     {
+      path: "contact-us",
+      element: lazyLoad(() => import("../features/contact-us/page/Contactus")),
+      handle: {
+        breadcrumb: "contact us",
+      },
+    },
+    {
       path: "search-advanced",
       element: lazyLoad(
         () => import("../features/search-advanced/pages/AdvancedSearch")

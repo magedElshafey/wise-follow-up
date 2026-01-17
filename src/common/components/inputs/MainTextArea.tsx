@@ -3,7 +3,8 @@ import { useTranslation } from "react-i18next";
 import { IconType } from "react-icons";
 import React from "react";
 
-interface MainTextAreaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
+interface MainTextAreaProps
+  extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   label?: string;
   error?: string;
   Icon?: IconType;
@@ -80,16 +81,19 @@ const MainTextArea = React.forwardRef<HTMLTextAreaElement, MainTextAreaProps>(
         )}
 
         <div
-          className={`transition duration-150 rounded-lg w-full py-3 px-4 flex items-start gap-3 bg-background-gray
+          className={`transition duration-150 rounded-lg w-full py-3 px-4 flex items-start gap-3 bg-bg-surface border border-border-subtle
+focus-within:ring-2 focus-within:ring-primary
+text-text-main
+placeholder:text-text-muted
           ${disabled ? "opacity-50 cursor-not-allowed" : ""}
-          ${
-            error
-              ? "ring-2 ring-red-500"
-              : "focus-within:ring-2 focus-within:ring-orangeColor"
-          }`}
+          ${error ? "ring-2 ring-red-500" : ""}`}
         >
           {Icon && (
-            <Icon size={20} className="text-text-gray mt-1 flex-shrink-0" aria-hidden="true" />
+            <Icon
+              size={20}
+              className="text-text-gray mt-1 flex-shrink-0"
+              aria-hidden="true"
+            />
           )}
 
           <textarea

@@ -4,6 +4,8 @@ import FetchHandler from "@/common/api/fetchHandler/FetchHandler";
 import useGetLeafletsDetails from "../api/useGetLeafletsDetails";
 import { formatDate } from "@/utils/formatDate";
 import PageSeo from "@/common/components/seo/PageSeo";
+import LeafletShareActions from "../components/LeafletShareActions";
+import ReadingProgress from "@/common/reading-progress/ReadingProgress";
 
 /* -------------------------------------------------------------------------- */
 /*                                   Page                                     */
@@ -50,6 +52,7 @@ const LeafletDetailsPage: FC = () => {
       <FetchHandler queryResult={queryResult} skeletonType="page">
         {leaflet && (
           <>
+            <ReadingProgress />
             {/* ================= Medical Header ================= */}
             <header className="bg-bg-page border-b border-border-subtle">
               <div className="containerr py-8 space-y-2">
@@ -214,7 +217,7 @@ const LeafletDetailsPage: FC = () => {
                       >
                         Open PDF in new tab
                       </a>
-
+                      <LeafletShareActions title={leaflet.title} />
                       <button
                         onClick={() => window.print()}
                         className="w-full text-xs text-primary underline"

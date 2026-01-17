@@ -11,6 +11,7 @@ import useGetDepartments from "@/features/uk-hierarchy/api/useGetDepartments";
 import useGetAllLeaflets from "@/features/leaflets/api/useGetAllLeaflets";
 import RecentlyUpdatedSection from "../components/recent-updates/RecentlyUpdatedSection";
 import HomePageSeo from "../components/seo/HomePageSeo";
+import ReadingProgress from "@/common/reading-progress/ReadingProgress";
 const Home = () => {
   const query = useGetAllLeaflets({ is_featured: true });
   const recentQuery = useGetAllLeaflets({ is_recently: true });
@@ -18,6 +19,7 @@ const Home = () => {
   return (
     <>
       <HomePageSeo />
+      <ReadingProgress />
       <Hero />
       <div className="min-h-7">
         <FetchHandler queryResult={query} skeletonType="card">

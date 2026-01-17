@@ -55,6 +55,15 @@ export const websiteRoutes: RouteObject = {
       },
     },
     {
+      path: "submit-review",
+      element: lazyLoad(
+        () => import("../features/submit-review/pages/SubmitReview")
+      ),
+      handle: {
+        breadcrumb: "terms",
+      },
+    },
+    {
       path: "policies/medical-disclaimer",
       element: lazyLoad(() => import("../features/policies/pages/MedicalPage")),
       handle: {
@@ -74,6 +83,36 @@ export const websiteRoutes: RouteObject = {
           path: ":slug",
           element: lazyLoad(
             () => import("../features/leaflets/pages/LeafletsDetails")
+          ),
+          handle: {
+            breadcrumb: "leaflet name",
+            queryKey: [apiRoutes.leaflets],
+          },
+        },
+      ],
+      handle: {
+        breadcrumb: "products",
+      },
+    },
+    {
+      path: "medical-calculators",
+      children: [
+        {
+          index: true,
+          element: lazyLoad(
+            () =>
+              import(
+                "../features/medical-calculators/pages/MedicalCalculatorsPage"
+              )
+          ),
+        },
+        {
+          path: ":slug",
+          element: lazyLoad(
+            () =>
+              import(
+                "../features/medical-calculators/pages/CalculatorDetailsPage"
+              )
           ),
           handle: {
             breadcrumb: "leaflet name",

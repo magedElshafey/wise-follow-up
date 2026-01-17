@@ -6,6 +6,7 @@ import { formatDate } from "@/utils/formatDate";
 import PageSeo from "@/common/components/seo/PageSeo";
 import LeafletShareActions from "../components/LeafletShareActions";
 import ReadingProgress from "@/common/reading-progress/ReadingProgress";
+import { HiExclamationTriangle } from "react-icons/hi2";
 
 /* -------------------------------------------------------------------------- */
 /*                                   Page                                     */
@@ -141,17 +142,66 @@ const LeafletDetailsPage: FC = () => {
 
                   {/* When to seek urgent help */}
                   <section
-                    className="rounded-card border border-primary/20 bg-primary/5 p-5"
                     role="note"
+                    aria-labelledby="medical-disclaimer-title"
+                    className="
+        rounded-card
+        border border-border-subtle
+        bg-bg-surface
+        p-5
+        shadow-soft
+      "
                   >
-                    <h3 className="text-sm font-semibold text-text-main mb-1">
-                      When to seek urgent help
-                    </h3>
-                    <p className="text-sm text-text-muted leading-relaxed">
-                      If symptoms worsen suddenly, do not improve, or you are
-                      concerned about your health, seek urgent medical advice or
-                      emergency care.
-                    </p>
+                    <div className="flex items-start gap-3">
+                      {/* Icon */}
+                      <span
+                        aria-hidden="true"
+                        className="
+            mt-0.5
+            inline-flex h-8 w-8 flex-shrink-0
+            items-center justify-center
+            rounded-full
+            bg-primary-soft
+            text-primary
+          "
+                      >
+                        <HiExclamationTriangle size={18} />
+                      </span>
+
+                      {/* Content */}
+                      <div className="space-y-2">
+                        <h3
+                          id="medical-disclaimer-title"
+                          className="text-sm font-semibold text-text-main"
+                        >
+                          Important medical information
+                        </h3>
+
+                        <p className="text-sm text-text-muted leading-relaxed">
+                          This leaflet is provided for general educational
+                          purposes only and is designed to support — not replace
+                          — advice from your own doctor, optometrist, or
+                          healthcare professional.
+                        </p>
+
+                        <ul className="list-disc pl-5 text-sm text-text-muted space-y-1">
+                          <li>
+                            Always follow the advice given to you during your
+                            consultation, even if it differs from what you read
+                            here.
+                          </li>
+                          <li>
+                            Medical information may change over time and may not
+                            reflect your individual circumstances.
+                          </li>
+                          <li>
+                            If your symptoms worsen, change suddenly, or you are
+                            concerned, seek urgent medical advice or emergency
+                            care.
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
                   </section>
 
                   {/* Related leaflets */}
@@ -206,7 +256,33 @@ const LeafletDetailsPage: FC = () => {
                   />
 
                   <MetaItem label="Version" value={leaflet.version} />
-
+                  <MetaItem label="leaflet type" value={leaflet.type} />
+                  <MetaItem
+                    label="organization"
+                    value={leaflet.organization?.name}
+                  />
+                  <MetaItem
+                    label="organization source"
+                    value={leaflet?.original_source_url}
+                    isLink={true}
+                  />
+                  <MetaItem
+                    label="department"
+                    value={leaflet?.department?.name}
+                  />
+                  <MetaItem label="trust id" value={leaflet?.trust_docs_id} />
+                  {leaflet?.reviewed_by && (
+                    <MetaItem
+                      label="reviewed by"
+                      value={leaflet?.reviewed_by}
+                    />
+                  )}
+                  {leaflet?.read_time_minutes && (
+                    <MetaItem
+                      label="reading time"
+                      value={leaflet?.read_time_minutes}
+                    />
+                  )}
                   {pdfUrl && (
                     <>
                       <a
@@ -222,7 +298,7 @@ const LeafletDetailsPage: FC = () => {
                         onClick={() => window.print()}
                         className="w-full text-xs text-primary underline"
                       >
-                        Print leaflet
+                        Print page
                       </button>
                     </>
                   )}
@@ -255,10 +331,13 @@ const EmptyPdfState = () => (
 
 type MetaValue = string | number | undefined | null;
 
-const MetaItem: FC<{ label: string; value?: MetaValue }> = ({
-  label,
-  value,
-}) => {
+type MetaItemProps = {
+  label: string;
+  value?: MetaValue;
+  isLink?: boolean;
+};
+
+const MetaItem: FC<MetaItemProps> = ({ label, value, isLink = false }) => {
   if (!value) return null;
 
   return (
@@ -266,7 +345,32 @@ const MetaItem: FC<{ label: string; value?: MetaValue }> = ({
       <p className="text-[11px] uppercase tracking-wide text-text-muted">
         {label}
       </p>
-      <p className="text-sm font-medium text-text-main">{value}</p>
+
+      {isLink && typeof value === "string" ? (
+        <a
+          href={value}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="
+            text-sm font-medium text-primary
+            underline-offset-2
+            hover:underline
+            focus-visible:outline-none
+            focus-visible:ring-2
+            focus-visible:ring-primary
+            focus-visible:ring-offset-2
+            focus-visible:ring-offset-bg-surface
+            inline-block
+            break-all
+          "
+        >
+          Visit source
+        </a>
+      ) : (
+        <p className="text-sm font-medium text-text-main break-words">
+          {value}
+        </p>
+      )}
     </div>
   );
 };

@@ -97,14 +97,6 @@ const ContactPage: React.FC = () => {
               error={errors.email?.message}
             />
 
-            <MainInput
-              label="Phone number (UK)"
-              placeholder="+44 7xxx xxx xxx"
-              required
-              {...register("phone")}
-              error={errors.phone?.message}
-            />
-
             <MainInput label="Subject" {...register("subject")} />
 
             <MainTextArea

@@ -44,11 +44,10 @@ const Home = () => {
           )}
         </FetchHandler>
       </div>
-
+      <BlogsHomeSection posts={DUMMY_BLOGS} />
       <TestimonialsSection />
 
       {/* <RecentlyUpdatedSection items={DUMMY_RECENT_UPDATES} /> */}
-      <BlogsHomeSection posts={DUMMY_BLOGS} />
     </>
   );
 };

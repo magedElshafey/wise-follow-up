@@ -15,7 +15,7 @@ type FooterConnectSectionProps = {
 };
 
 const FooterConnectSection: React.FC<FooterConnectSectionProps> = ({
-  buyMeCoffeeUrl = "https://www.buymeacoffee.com/",
+  buyMeCoffeeUrl = "https://ko-fi.com/wisefollowup",
 }) => {
   const emailId = useId();
   const {
@@ -160,7 +160,7 @@ const FooterConnectSection: React.FC<FooterConnectSectionProps> = ({
           "
         >
           <span aria-hidden="true">☕</span>
-          Buy me a coffee
+          Buy us a Kofi
         </a>
 
         <p className="mt-2 text-[11px] text-text-muted">

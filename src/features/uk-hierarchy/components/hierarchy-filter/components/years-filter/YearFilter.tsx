@@ -5,7 +5,7 @@ import YearRangeSlider from "./YearRangeSlider";
 import YearFilterSkeleton from "./YearFilterSkeleton";
 import "./double-slider.css";
 
-const START = 1729;
+const START = 1992;
 const END = 2026;
 
 const YearFilter = () => {

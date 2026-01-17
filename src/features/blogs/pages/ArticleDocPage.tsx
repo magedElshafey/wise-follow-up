@@ -22,7 +22,7 @@ const ArticleDocPage: React.FC<Props> = ({
   tocFromData = true,
 }) => {
   const query = useQueryHook();
-
+  console.log("query from policies ", query?.data);
   const sections = useMemo(() => query.data?.content ?? [], [query.data]);
   const sectionsWithIds = useSectionsWithIds(sections);
 

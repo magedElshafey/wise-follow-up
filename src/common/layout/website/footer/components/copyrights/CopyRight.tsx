@@ -27,7 +27,16 @@ const CopyRight = () => {
     >
       <div className="text-xs text-text-muted">
         <p className="mb-1">
-          &copy; {year} Wise Follow Up. All rights reserved.
+          &copy; {year}{" "}
+          <a
+            className="text-primary font-medium underline"
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://medwisely.com/"
+          >
+            medwisely
+          </a>
+          . All rights reserved.
         </p>
         <p className="text-[11px] leading-relaxed">
           Information on this website is for general education only and does not
@@ -75,21 +84,6 @@ const CopyRight = () => {
         >
           Cookie settings
         </button>
-        {/* Back to top */}
-        <a
-          href="#top"
-          className="
-                inline-flex items-center gap-1 rounded-pill
-                bg-bg-page px-3 py-1.5 text-[11px] text-text-muted
-                hover:bg-primary-soft hover:text-primary
-                focus-visible:outline-none focus-visible:ring-2
-                focus-visible:ring-primary focus-visible:ring-offset-2
-                focus-visible:ring-offset-bg-surface
-              "
-        >
-          <span aria-hidden="true">↑</span>
-          <span>Back to top</span>
-        </a>
       </div>
     </div>
   );

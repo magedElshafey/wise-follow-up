@@ -10,9 +10,10 @@ import { useTranslation } from "react-i18next";
 import handlePromisError from "@/utils/handlePromiseError";
 import { toast } from "sonner";
 import PageSeo from "@/common/components/seo/PageSeo";
-
+import useNewsLetterApi from "@/common/layout/website/footer/newsletter/api/useNewsLetterApi";
 const ContactPage: React.FC = () => {
   const { isPending, mutateAsync } = useSubmitContactus();
+  const { mutateAsync: mutateNewsLetter } = useNewsLetterApi();
   const { t } = useTranslation();
 
   const {
@@ -20,16 +21,19 @@ const ContactPage: React.FC = () => {
     handleSubmit,
     reset,
     formState: { errors, isValid },
+    getValues,
   } = useForm<ContactFormValues>({
     resolver: zodResolver(contactSchema),
     mode: "onTouched",
   });
 
   const onSubmit = async (data: ContactFormValues) => {
+    const email = getValues().email;
     try {
       const response = await mutateAsync(data);
       if (response?.status) {
         toast.success(response.message);
+        mutateNewsLetter(email);
         reset();
       }
     } catch (error) {

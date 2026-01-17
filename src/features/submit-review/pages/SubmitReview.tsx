@@ -14,24 +14,29 @@ import { toast } from "sonner";
 import { useTranslation } from "react-i18next";
 import useSubmitReview from "../api/useSubmitReview";
 import handlePromisError from "@/utils/handlePromiseError";
+import useNewsLetterApi from "@/common/layout/website/footer/newsletter/api/useNewsLetterApi";
 const SubmitReviewPage: React.FC = () => {
   const { t } = useTranslation();
   const submitReview = useSubmitReview();
+  const { mutateAsync: mutateNewsLetter } = useNewsLetterApi();
 
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors, isValid, isSubmitting },
+    getValues,
   } = useForm<SubmitReviewValues>({
     resolver: zodResolver(submitReviewSchema),
     mode: "onTouched",
   });
 
   const onSubmit = async (data: SubmitReviewValues) => {
+    const email = getValues().email;
     try {
       await submitReview.mutateAsync(data);
       toast.success(t("Thank you for your review"));
+      mutateNewsLetter(email);
       reset();
     } catch (error) {
       handlePromisError(error);

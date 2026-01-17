@@ -1,5 +1,4 @@
 import AboutHero from "../components/AboutHero";
-import OurStory from "../components/OurStory";
 import MissionValues from "../components/MissionValues";
 import MissionVisionMessage from "../components/MissionVisionMessage";
 import FounderProfile from "../components/FounderProfile";
@@ -26,10 +25,10 @@ export default function AboutPage() {
       <ReadingProgress />
       <main>
         <AboutHero />
-        <OurStory />
+
         <MissionVisionMessage />
         <FounderProfile {...founders[0]} />
-        <FounderProfile {...founders[1]} />
+        <FounderProfile {...founders[1]} reverse />
 
         <MissionValues />
       </main>

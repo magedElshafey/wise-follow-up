@@ -16,7 +16,7 @@ const items = [
 
 export default function MissionVisionMessage() {
   return (
-    <section className="bg-bg-alt py-section-y">
+    <section className="py-5 md:my-6 lg:py-7 xl:py-8 2xl:py-10">
       <div className="containerr">
         <div className="grid gap-8 md:grid-cols-3">
           {items.map((item) => (
